@@ -46,14 +46,14 @@
                         {
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4 dropdown-toggle">Admin</a>
-                                <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu mt-0"><a href="#" class="dropdown-item small text-uppercase">Courses</a><a href="#" class="dropdown-item small text-uppercase">Enrollments</a><a href="#" class="dropdown-item small text-uppercase">Scheduled Classes</a><a href="#" class="dropdown-item small text-uppercase">Students</a><a href="#" class="dropdown-item small text-uppercase">Student Statuses</a></div>
+                                <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu mt-0"><a href="@Url.Action("Index","Cours")" class="dropdown-item small text-uppercase">Courses</a><a href="@Url.Action("Index","Enrollments")" class="dropdown-item small text-uppercase">Enrollments</a><a href="@Url.Action("Index","ScheduledClasses")" class="dropdown-item small text-uppercase">Scheduled Classes</a><a href="@Url.Action("Index","Students")" class="dropdown-item small text-uppercase">Students</a><a href="@Url.Action("Index","StudentStatus")" class="dropdown-item small text-uppercase">Student Statuses</a></div>
                             </li>
                         }
                         <li class="nav-item">
                             <a href="@Url.Action("Contact", "Home")" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4">Contact </a>
                         </li>
                         <li class="nav-item mt-4 mt-lg-0">
-                            <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-outline-primary nav-btn btn-sm"> <i class="fas fa-sign-out-alt mr-2"></i>@Html.Partial("_LoginPartial")</button>
+                            <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-outline-primary nav-btn btn-sm"> <i style="margin-left: 2.5em" class="fas fa-sign-out-alt mr-2 "></i>@Html.Partial("_LoginPartial")</button>
                         </li>
                     </ul>
                 </div>
@@ -68,72 +68,23 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-8 col-md-6 mb-4">
-                    <h5 class="lined lined-dark mb-3">About Multi</h5>
-                    <p class="text-muted text-small">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus magna. Cras in mi at felis aliquet congue. Vivamus magna. Cras in mi at felis aliquet congue.</p>
-                    <p class="text-muted text-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue.</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5 class="lined lined-dark mb-3">Our offices</h5>
-                    <h6>London</h6>
-                    <p class="text-muted mb-0 text-small">Donec eleifend</p>
-                    <p class="text-muted mb-0 text-small">libero at sagittis</p>
-                    <p class="text-muted mb-4 text-small">mollis + 44 2556 789 8799 </p>
-                    <h6>Paris</h6>
-                    <p class="text-muted mb-0 text-small">Donec eleifend</p>
-                    <p class="text-muted mb-0 text-small">libero at sagittis</p>
-                    <p class="text-muted mb-0 text-small">mollis + 44 2556 789 8799 </p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5 class="lined lined-dark mb-3">Popular Categories</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="footer-link text-small">Graphic design</a></li>
-                        <li><a href="#" class="footer-link text-small">Web design</a></li>
-                        <li><a href="#" class="footer-link text-small">Support</a></li>
-                        <li><a href="#" class="footer-link text-small">Accounting</a></li>
-                        @if (User.IsInRole("Admin"))
-                        {
+                    @if (User.IsInRole("Admin") || User.IsInRole("Scheduler"))
+                    {
+                        <h5 class="lined lined-dark mb-3">Administrative Links</h5>
+
+                        <ul>
+
                             <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">Roles</a></li>
                             <li class="nav-item"><a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">Create</a></li>
-                        }
-                    </ul>
+
+                        </ul>
+                    }
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5 class="lined lined-dark mb-3">Let's be friends</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google-plus-g"></i></a></li>
-                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fas fa-envelope"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h5 class="lined lined-dark mb-3">News and Updates</h5>
-                    <p class="text-muted mb-4 text-small">
-                        Sign up to get weekly portion of fresh jobs and news from us.
-                        <form action="#">
-                            <div class="input-group mb-3">
-                                <input type="text" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
-                                <div class="input-group-append">
-                                    <button id="basic-addon2" type="submit" class="input-group-text"><i class="fas fa-paper-plane"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </p>
-                </div>
+
+
             </div>
         </div>
-        <div class="bg-dark py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 text-center text-lg-left mb-1 mb-lg-0">
-                        <p class="small text-gray mb-0">©2019 Best company</p>
-                    </div>
-                    <div class="col-lg-6 text-center text-lg-right">
-                        <p class="small text-gray mb-0">Template by <a href="https://bootstrapious.com" class="text-gray">Bootstrapious.com</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </footer>
     <!-- JavaScript files-->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
@@ -147,6 +98,6 @@
 </body>
 </html>
 @*@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)*@
 

@@ -1,0 +1,187 @@
+﻿@model IEnumerable<SAT.DATA.EF.Student>
+
+@{
+    ViewBag.Title = "Student Index";
+}
+@if (User.IsInRole("Admin") || User.IsInRole("Scheduler"))
+{
+    <div id="loginModal" tabindex="-1" role="dialog" aria-lebelledby="loginModalLabel" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog modal-sm">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 id="loginModalLabel" class="text-uppercase modal-title m-0">Customers login</h5>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" class="small text-muted">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <input type="email" placeholder="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="password" class="form-control">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-outline-primary nav-btn btn-sm"> <i class="fas fa-sign-out-alt mr-2"></i>Login </button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <p class="text-muted small">Not registered yet?</p>
+                        <p class="small text-muted"> <a href="#" class="font-weight-bold">Register now!</a> It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="py-5 bg-cover bg-gray">
+        <div class="container py-5">
+            <div aria-label="breadcrumb" class="nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./">Home</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">@ViewBag.Title</li>
+                </ol>
+            </div>
+            <h1>@ViewBag.Title</h1>
+            <div>
+                <h5>
+                    <a href="@Url.Action("Create", "Students")">Create New Student</a>
+                </h5>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h2 class="my-4">Students</h2>
+
+                    @*@foreach (var item in Model)
+                        {
+
+                            <div class="col-lg-3">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.FirstName)</h5>
+                                        <p class="card-text">@Html.DisplayFor(modelItem => item.Major)</p>
+                                        <a href=" @Html.ActionLink("Details", "Details", new { id = item.StudentId })" class="btn btn-primary"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }*@
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Major)
+                        </th>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.State)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.ZipCode)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.PhotoUrl)
+                            </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentStatus.SSName)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Major)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.State)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ZipCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>*@
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>*@
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.PhotoUrl)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentStatus.SSName)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                @*<blockquote class="blockquote my-4"></blockquote>*@
+                @*<h3 class="mb-4">Header Level 3</h3>
+                    <p class="mb-4"></p>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                        <li>Aliquam tincidunt mauris eu risus.</li>
+                    </ul><img src="~/Content/img/blog1.jpg" alt="Example blog post alt" class="img-fluid mb-4">*@
+                @*<form id="contact-form" method="post" action="contact.php" class="contact-form form">
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label for="name" class="font-weight-normal">Name <span class="text-primary">*</span></label>
+                                <input id="name" type="text" name="name" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label for="email" class="font-weight-normal">Email <span class="text-primary">*</span></label>
+                                <input id="email" type="email" name="email" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <label for="message" class="font-weight-normal">Comment <span class="text-primary">*</span></label>
+                                <textarea id="message" rows="3" name="message" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-lg-12 text-right">
+                                <button type="submit" class="btn btn-outline-primary"> <i class="far fa-comment mr-2"> </i>Post comment</button>
+                            </div>
+                        </div>
+                    </form>*@
+            </div>
+        </div>
+
+    </section>
+}

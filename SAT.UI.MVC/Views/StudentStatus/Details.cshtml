@@ -1,4 +1,9 @@
-﻿@if (User.IsInRole("Admin"))
+﻿@model SAT.DATA.EF.StudentStatus
+
+@{
+    ViewBag.Title = "Student Status Details";
+}
+@if (User.IsInRole("Admin"))
 {
     <div id="loginModal" tabindex="-1" role="dialog" aria-lebelledby="loginModalLabel" aria-hidden="true" class="modal fade">
         <div role="document" class="modal-dialog modal-sm">
@@ -27,55 +32,51 @@
             </div>
         </div>
     </div>
-    <section style="background: url(img/jumbotron1.jpg)" class="py-5 bg-cover bg-center">
-        <div class="hero-overlay"></div>
-        <div class="container py-5 text-white text-center">
-            <h1 class="text-shadow hero-heading">Welcome to SAT!</h1>
-        </div>
-    </section>
-    <section class="py-5">
-        <div class="container py-5">
-            <h2 class="mb-4">Student Administration Tool</h2>
-            <p class="lead">This tool is intended to be used by schedulers and administrators for class and student scheduling purposes.</p>
-        </div>
-    </section>
-    
-    <section class="py-5">
-        <div class="container py-5">           
-            <h2 class="mb-5">Features</h2>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                 
-                    <h5 class="lined mb-4">Create new courses</h5>
-                    <p class="text-muted text-small">Ability to create new course curriculum, time, and Id's.</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                 
-                    <h5 class="lined mb-4">Update Existing Records</h5>
-                    <p class="text-muted text-small">Make sure your database is up to date.</p>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                
-                    <h5 class="lined mb-4">Review Current Information</h5>
-                    <p class="text-muted text-small">Ensure that you have the information you need.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-}
-else
-{
     <section class="py-5 bg-cover bg-gray">
         <div class="container py-5">
             <div aria-label="breadcrumb" class="nav">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="./">Home</a></li>
-                    <li aria-current="page" class="breadcrumb-item active">Please Login</li>
+                    <li aria-current="page" class="breadcrumb-item active">@ViewBag.Title</li>
                 </ol>
             </div>
-            <h1 class="text-center">Please Login for Access</h1>
-            <p class="lead my-4 text-center">In order to access this tool, you must log in. If you feel you've reached this page error, feel free to contact us.</p>
+            <h1>@ViewBag.Title</h1>
+            <div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.SSID }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SSName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SSName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SSDescription)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SSDescription)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
         </div>
     </section>
 }

@@ -1,0 +1,105 @@
+﻿@model SAT.DATA.EF.Enrollment
+
+@{
+    ViewBag.Title = "Edit Enrollment";
+}
+@if (User.IsInRole("Admin") || User.IsInRole("Scheduler"))
+{
+    <div id="loginModal" tabindex="-1" role="dialog" aria-lebelledby="loginModalLabel" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog modal-sm">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 id="loginModalLabel" class="text-uppercase modal-title m-0">Customers login</h5>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" class="small text-muted">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <input type="email" placeholder="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="password" class="form-control">
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-outline-primary nav-btn btn-sm"> <i class="fas fa-sign-out-alt mr-2"></i>Login </button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <p class="text-muted small">Not registered yet?</p>
+                        <p class="small text-muted"> <a href="#" class="font-weight-bold">Register now!</a> It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="py-5 bg-cover bg-gray">
+        <div class="container py-5">
+            <div aria-label="breadcrumb" class="nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./">Home</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">@ViewBag.Title</li>
+                </ol>
+            </div>
+            <h1>@ViewBag.Title</h1>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-9">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>Enrollment</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.EnrollmentId)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StudentId, "StudentId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ScheduledClassId, "ScheduledClassId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("ScheduledClassId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ScheduledClassId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </section>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
