@@ -50,7 +50,7 @@ namespace SAT.DATA.EF/*.Metadata*/
     public class EnrollmentMetadata
     {
         [Required(ErrorMessage = "* Student ID is Required *")]
-        [Display(Name = "Student ID")]
+        [Display(Name = "Student Name")]
         [Range(0, int.MaxValue, ErrorMessage = "* Student ID must be a valid number (0 or larger) *")]
         public int StudentId { get; set; }
 
@@ -60,7 +60,7 @@ namespace SAT.DATA.EF/*.Metadata*/
         public int ScheduledClassId { get; set; }
 
         [Required(ErrorMessage = "* Enrolled Date is Required *")]
-        [Display(Name = "Enrolled")]
+        [Display(Name = "Date Enrolled")]
         [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime EnrollmentDate { get; set; }
     }
@@ -115,7 +115,6 @@ namespace SAT.DATA.EF/*.Metadata*/
         public string CourseInfo
         {
             get{ return StartDate + " " + Cours.CourseName + " " + Location; }
-
         }
     }
     #endregion

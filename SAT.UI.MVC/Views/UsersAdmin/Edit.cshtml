@@ -1,50 +1,93 @@
 ﻿@model SAT.UI.MVC.Models.EditUserViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit User";
 }
-
-<h2>Edit.</h2>
-
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Edit User Form.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-               @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-               @Html.ValidationMessageFor(model => model.Email)
+<div id="loginModal" tabindex="-1" role="dialog" aria-lebelledby="loginModalLabel" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog modal-sm">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 id="loginModalLabel" class="text-uppercase modal-title m-0">Customers login</h5>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" class="small text-muted">&times;</span></button>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Roles", new { @class = "control-label col-md-2" })
-            <span class=" col-md-10">
-                @foreach (var item in Model.RolesList)
-                {
-                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                    @Html.Label(item.Value, new { @class = "control-label" })
-                }
-            </span>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="modal-body">
+                <form action="">
+                    <div class="form-group">
+                        <input type="email" placeholder="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="password" class="form-control">
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-outline-primary nav-btn btn-sm"> <i class="fas fa-sign-out-alt mr-2"></i>Login </button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <p class="text-muted small">Not registered yet?</p>
+                    <p class="small text-muted"> <a href="#" class="font-weight-bold">Register now!</a> It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+<section class="py-5 bg-cover bg-gray">
+    <div class="container py-5">
+        <div aria-label="breadcrumb" class="nav">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li aria-current="page" class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+        </div>
+        <h1>@ViewBag.Title</h1>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</section>
+
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-9">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @*@Html.Label("Roles", new { @class = "control-label col-md-2" })*@
+                            <span class=" col-md-10">
+                                @foreach (var item in Model.RolesList)
+                                {
+                                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                    @Html.Label(item.Value, new { @class = "control-label" })
+                                }
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
